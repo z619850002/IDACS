@@ -1,0 +1,19 @@
+Model: Hash
+
+# Sampling
+Sampling: NGP
+MAX_SAMPLES: 256
+NEAR_DISTANCE: 0.01
+
+
+# Function
+Function: Sigma
+
+# Loss
+Loss: [Color, Depth]
+
+# Training
+N_epochs: 30
+lr: 0.01
+shrink: 30
+

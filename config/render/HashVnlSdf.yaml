@@ -1,0 +1,19 @@
+Model: Hash
+
+# Sampling
+Sampling: Vanilla
+N_samples: 64
+N_importance_samples: 64
+
+# Function
+Function: SDF
+speed_factor: 10.
+beta_init: 0.1
+
+# Loss
+Loss: [Color]
+
+# Training
+N_epochs: 20
+lr: 0.01
+shrink: 30
