@@ -155,8 +155,8 @@ if __name__=="__main__":
     gt_path = sys.argv[1]
     estimated_path = sys.argv[2]
     estimated_rotations = torch.load(os.path.join(estimated_path, "tracking_rotation.pt"))
-    estimated_translations = torch.load(os.path.join(estimated_path + "tracking_translation.pt"))
-    gt_poses = torch.load(gt_path)
+    estimated_translations = torch.load(os.path.join(estimated_path, "tracking_translation.pt"))
+    gt_poses = torch.load(os.path.join(gt_path, "poses_gt.pt"))
     gt_poses = gt_poses[:,:3,:]
     gt_poses[:, :,1:3] *= -1  # [right up back] to [right down front]
     estimated_poses = []
@@ -190,3 +190,11 @@ if __name__=="__main__":
     print('ATE is: ', ate)
     print('RPE trans is: ', rpe_trans * 100)
     print('RPE rot is: ', rpe_rot * 180 / 3.1416)
+
+    scale = 1000.
+
+    gt_poses[:, :3, 3] = gt_poses[:, :3, 3] * scale
+    estimated_poses[:, :3, 3] = estimated_poses[:, :3, 3]
+
+    c2ws_est_aligned = align_ate_c2b_use_a2b(estimated_poses, gt_poses)
+    visualize_poses(gt_poses.cpu().numpy(), c2ws_est_aligned.cpu().numpy())

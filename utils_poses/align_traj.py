@@ -54,7 +54,6 @@ def align_ate_c2b_use_a2b(traj_a, traj_b, traj_c=None):
     R = R[None, :, :].astype(np.float32)  # (1, 3, 3)
     t = t[None, :, None].astype(np.float32)  # (1, 3, 1)
     s = float(s)
-    print('Scale is: ', s)
     R_c = traj_c[:, :3, :3]  # (N1, 3, 3)
     t_c = traj_c[:, :3, 3:4]  # (N1, 3, 1)
 
