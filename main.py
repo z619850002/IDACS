@@ -484,8 +484,8 @@ if __name__=="__main__":
 
 
 
-    torch.save(model.learned_poses.shift_rotations, pose_path + 'ba_rotation.pt')
-    torch.save(model.learned_poses.shift_translations, pose_path + 'ba_translation.pt')
+    torch.save(model.learned_poses.shift_rotations, pose_path + '/ba_rotation.pt')
+    torch.save(model.learned_poses.shift_translations, pose_path + '/ba_translation.pt')
     #Align test frames
     # model.fix_first_frame()
     for frame_ind in range(1, data_length):
@@ -533,6 +533,6 @@ if __name__=="__main__":
     all_rotations = torch.stack(all_rotations)
     all_translations = torch.stack(all_translations)
 
-    torch.save(all_rotations, pose_path + 'tracking_rotation.pt')
-    torch.save(all_translations, pose_path + 'tracking_translation.pt')
+    torch.save(all_rotations, pose_path + '/tracking_rotation.pt')
+    torch.save(all_translations, pose_path + '/tracking_translation.pt')
 
