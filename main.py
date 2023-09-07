@@ -72,11 +72,8 @@ def train_iter(train_dataset, hparams, model, optimizer, all_ray_choices, iter, 
 
     mean_depth = torch.mean(all_depth_target)
 
-    # loss_ratio = (all_color_target.norm() / all_depth_target[all_depth_target > 1e-3].norm()).item()/4
-    #TODO:Barn
-    loss_ratio = (all_color_target.norm() / all_depth_target[all_depth_target > 1e-3].norm()).item() / 4
 
-    # loss_ratio = (all_color_target.norm() / all_depth_target[all_depth_target > 1e-3].norm()).item()/4
+    loss_ratio = (all_color_target.norm() / all_depth_target[all_depth_target > 1e-3].norm()).item()  * hparams['depth_loss_ratio']
 
     # loss_ratio = 0
 
@@ -157,7 +154,7 @@ def train_iter(train_dataset, hparams, model, optimizer, all_ray_choices, iter, 
 
     if with_motion_model:
         pose_loss = model.get_pose_prior_loss(frame_ind)
-        loss += 0.1 * pose_loss
+        loss += hparams['prior_loss_ratio'] * pose_loss
 
     #
     # if len(result['color_list']) > 1:
@@ -191,7 +188,7 @@ def train_iter(train_dataset, hparams, model, optimizer, all_ray_choices, iter, 
 
 
 
-
+#No depth loss
 def train_iter_tracking(train_dataset, hparams, model, optimizer, all_ray_choices, iter, global_iters, all_iters, frame_ind, ref_ind, current_shift_rotation, current_shift_translation, stop_update_grid = False):
     # start = tim.time()
 
@@ -443,8 +440,11 @@ if __name__=="__main__":
             print('Global BA')
             for i in range(hparams['global_ba_iters']*2):
                 random_frame_indices = model.keyframe_list
+                #Testing frames won't be optimized
                 random_frame_indices = [k for k in range(random_frame_indices[0], random_frame_indices[-1] + 1) if
                                         (k + 1) % 8 != 0]
+
+                # random_frame_indices = [k for k in range(random_frame_indices[0], random_frame_indices[-1] + 1)]
                 # random_frame_indices = [k for k in range(random_frame_indices[0], random_frame_indices[-1] + 1)]
                 # print('Random indices are: ', random_frame_indices)
                 random_frame_index = np.random.choice(random_frame_indices)
@@ -465,6 +465,7 @@ if __name__=="__main__":
         random_frame_indices = model.keyframe_list
         #Skip testing frames
         random_frame_indices = [k for k in range(random_frame_indices[0], random_frame_indices[-1]+1) if (k+1)%8!=0]
+        # random_frame_indices = [k for k in range(random_frame_indices[0], random_frame_indices[-1]+1)]
 
         # print('Random indices are: ', random_frame_indices)
         random_frame_index = np.random.choice(random_frame_indices)

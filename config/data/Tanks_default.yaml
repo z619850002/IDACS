@@ -29,6 +29,7 @@ use_inv_depth_loss: True
 inv_depth_ratio_indoor: 30
 inv_depth_ratio_outdoor: 50
 depth_loss_ratio: 0.25
+prior_loss_ratio: 0.001
 
 #interpolate
 distance_thres: 0.2
