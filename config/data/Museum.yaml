@@ -14,5 +14,4 @@ rotation_lr_ratio: 0.006
 translation_lr_ratio: 0.006
 distortion_lr_ratio:  0.001
 
-#loss function
-use_flow_loss: True
+use_flow_initialize: True

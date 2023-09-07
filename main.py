@@ -123,10 +123,9 @@ def train_iter(train_dataset, hparams, model, optimizer, all_ray_choices, iter, 
     #     print('depth scale: ', depth_loss_test/depth_loss)
     flow_loss = 0.
     compute_flow = False
-    # if len(tracking_frames) > 0 and hparams['use_flow_loss']:
     num = 0
 
-    if hparams['use_flow_loss']:
+    if hparams['use_flow_initialize']:
         num = 0
         for ind in tracking_frames:
             if ind > 0:
@@ -394,7 +393,7 @@ if __name__=="__main__":
         model.depth_distortion.shift_scales(frame_ind-1)
         model.train()
         #Get flow
-        if hparams['use_flow_loss']:
+        if hparams['use_flow_initialize']:
             model.get_flow(frame_ind)
 
         create_keyframe =  False

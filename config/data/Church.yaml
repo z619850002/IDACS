@@ -12,4 +12,4 @@ aabb: 2.
 aabb_scale: 1.
 
 #loss function
-use_flow_loss: True
+use_flow_initialize: True

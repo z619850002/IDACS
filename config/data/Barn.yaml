@@ -9,6 +9,6 @@ data_length: 150
 aabb: 2.
 aabb_scale: 2.
 
-#loss function
-use_flow_loss: True
+
+use_flow_initialize: True
 inv_depth_ratio: 70

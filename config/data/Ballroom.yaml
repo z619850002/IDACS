@@ -9,5 +9,5 @@ data_length: 150
 aabb: 4.
 aabb_scale: 1.
 
-#loss function
-use_flow_loss: True
+
+use_flow_initialize: True
