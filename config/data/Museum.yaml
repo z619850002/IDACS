@@ -2,41 +2,12 @@ data_class: Colmap
 
 data_root: /media/kyrie/000A8561000BB32A/Tanks/
 data_name: Museum
-downsample: 1.
-
-
-noise: True
-near: 0.01
-far: 12
-
-erode: True
-aabb: 4.
-aabb_scale: 1.
-aabb_shift: 0.
-#Family Ballroom 4
-#Igna  1
-#Barn Church Horse 2
-#Francis Museum 4
-
-levels: 4
-
-#Data
-#data_length: 120
-#Museum 100
+data_type: indoor
 data_length: 100
 
-#optimization
-localize_iters: 100
-test_localize_iters: 50
-mapping_iters: 100
-initialize_iters: 400
-initialize_num: 4
-keyframe_interval: 2
-
-
-global_ba_iters: 100
-global_ba_interval: 16
-
+#Adjust the bounding box
+aabb: 4.
+aabb_scale: 1.
 
 
 rotation_lr_ratio: 0.006
@@ -45,16 +16,3 @@ distortion_lr_ratio:  0.001
 
 #loss function
 use_flow_loss: True
-use_inv_depth_loss: True
-inv_depth_ratio: 30
-depth_loss_ratio: 0.25
-
-#interpolate
-distance_thres: 0.2
-unknown_distance: 1.0
-
-learn_scale: False
-learn_shift: False
-
-
-tracking_skip_interval: 1

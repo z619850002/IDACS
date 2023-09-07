@@ -14,9 +14,23 @@ def get_hparams():
     config_cmd = parser.parse_args()
 
     hparams = CN(new_allowed=True)
+
+    hparams.merge_from_file(f'config/data/Tanks_default.yaml')
+
+
     hparams.merge_from_file(f'config/render/{config_cmd.render}.yaml')
     # data config must behind the render config since some parameters maybe overrided
     hparams.merge_from_file(f'config/data/{config_cmd.data}.yaml')
+    if hparams['data_type'] == 'indoor':
+        hparams['aabb_shift'] = hparams['aabb_shift_indoor']
+        if 'inv_depth_ratio' not in hparams:
+            hparams['inv_depth_ratio'] = hparams['inv_depth_ratio_indoor']
+    elif hparams['data_type'] == 'outdoor':
+        hparams['aabb_shift'] = hparams['aabb_shift_outdoor']
+        if 'inv_depth_ratio' not in hparams:
+            hparams['inv_depth_ratio'] = hparams['inv_depth_ratio_outdoor']
+
+
     hparams.test_epoch = config_cmd.test_epoch
     hparams.start_epoch = config_cmd.start_epoch
     # hparams.Loss = config_cmd.loss
