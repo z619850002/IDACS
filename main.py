@@ -408,7 +408,7 @@ if __name__=="__main__":
         for i in range(localize_iters):
             # train_iter(train_dataset, hparams, model, pose_optimizer, all_ray_choices, i, global_iters, localize_iters, frame_ind, tracking_frames=[frame_ind])
             with_motion_model = False
-            if i<localize_iters/2:
+            if i<localize_iters/5:
                 with_motion_model = True
             train_iter(train_dataset, hparams, model, pose_optimizer, all_ray_choices, i, global_iters, localize_iters, frame_ind, tracking_frames=[], with_motion_model=with_motion_model)
         # model.activate_mapping_network()

@@ -1111,7 +1111,17 @@ class TrackingAndMappingSamplingSkip(nn.Module):
         relative_predicted_translation = torch.matmul(pytorch3d.transforms.quaternion_to_matrix(predicted_rotation).T, current_translation-predicted_translation)
         relative_rotation_error = F.smooth_l1_loss(relative_predicted_rotation, torch.Tensor([1., 0., 0., 0.]).to(relative_predicted_translation.device))
         relative_translation_error = F.smooth_l1_loss(relative_predicted_translation, torch.zeros_like(relative_predicted_translation))
-        return relative_rotation_error + relative_translation_error
+
+        distortion_error = 0.
+        if frame_ind > 0:
+            current_scale = self.depth_distortion.global_scales[frame_ind]
+            current_shift = self.depth_distortion.global_shifts[frame_ind]
+            last_scale = self.depth_distortion.global_scales[frame_ind-1].data.detach()
+            last_shift = self.depth_distortion.global_shifts[frame_ind-1].data.detach()
+            distortion_error += F.smooth_l1_loss(current_scale, last_scale)
+            distortion_error += F.smooth_l1_loss(current_shift, last_shift)
+
+        return relative_rotation_error + relative_translation_error + distortion_error
 
     def get_epipolar_constraint_loss(self, frame_index, forward=True):
         if forward:
