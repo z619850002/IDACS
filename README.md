@@ -1,4 +1,4 @@
-# IDACS
+# I-DACS
 - A framework for un-posed radiance field construction.
 - Our experiments were all conducted on Ubuntu 16.04.
 ## Dependencies and configurations
