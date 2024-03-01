@@ -10,7 +10,7 @@
 - Download pretrained weights of [RAFT](https://github.com/princeton-vl/RAFT), most important raft-kitti.pth, and store them in path RAFT/models/
 
 ## Dataset
-- We use the setting of [Nope-NeRF](https://github.com/ActiveVisionLab/nope-nerf) on Tanks and Temples with some modifications in the data structure. Your can download it with our link and extract it to your own disk.
+- We use the setting of [Nope-NeRF](https://github.com/ActiveVisionLab/nope-nerf) on Tanks and Temples with some modifications in the data structure. Your can download it with our [link](https://pan.baidu.com/s/1BW1yWTzutn8zxHjIF2fjxA?pwd=xa2l ), the extraction code is xa2l 
 
 ## Usage
 - Modify the dataroot of config files in config/data/ to your path, such as: 
